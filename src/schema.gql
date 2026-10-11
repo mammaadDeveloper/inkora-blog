@@ -8,6 +8,16 @@ type AuthTokens {
   user: UserType!
 }
 
+type Comment {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateCommentInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 input CreatePostInput {
   content: String!
   published: Boolean = false
@@ -15,12 +25,15 @@ input CreatePostInput {
 }
 
 type Mutation {
+  createComment(createCommentInput: CreateCommentInput!): Comment!
   createPost(input: CreatePostInput!): PostType!
   deletePost(postId: String!): Boolean!
   login(input: SignInInput!): AuthTokens!
   refreshTokens(input: RefreshTokenInput!): AuthTokens!
   register(input: RegisterInput!): AuthTokens!
+  removeComment(id: Int!): Comment!
   signOut(input: RefreshTokenInput!): Boolean!
+  updateComment(updateCommentInput: UpdateCommentInput!): Comment!
   updatePost(input: UpdatePostInput!, postId: String!): PostType!
 }
 
@@ -34,6 +47,7 @@ type PostType {
 
 type Query {
   adminPosts: [PostType!]!
+  comment(id: Int!): Comment!
 
   """Returns the current application health status."""
   health: String!
@@ -54,6 +68,12 @@ input RegisterInput {
 input SignInInput {
   email: String!
   password: String!
+}
+
+input UpdateCommentInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }
 
 input UpdatePostInput {

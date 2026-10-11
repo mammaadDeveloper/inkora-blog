@@ -10,6 +10,7 @@ import { AppService } from './app.service.js';
 import { validateEnvironment } from './config/env.validation.js';
 import { PrismaModule } from './prisma/prisma.module.js';
 import { PostsModule } from './posts/post.module.js';
+import { CommentModule } from './comment/comment.module.js';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { PostsModule } from './posts/post.module.js';
     PrismaModule,
     AuthModule,
     PostsModule,
+    CommentModule,
   ],
   providers: [AppResolver, AppService],
 })
