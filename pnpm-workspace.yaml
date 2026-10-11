@@ -1,0 +1,13 @@
+allowBuilds:
+  '@apollo/protobufjs': true
+  '@prisma/client': true
+  '@prisma/engines': true
+  bcrypt: true
+  prisma: true
+onlyBuiltDependencies:
+  - '@apollo/protobufjs'
+  - '@prisma/client'
+  - '@prisma/engines'
+  - bcrypt
+  - esbuild
+  - prisma

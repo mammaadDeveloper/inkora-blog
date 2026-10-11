@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  passwordHash String
+  role         UserRole      @default(USER)
+  posts        Post[]
+  refreshTokens RefreshToken[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model RefreshToken {
+  id               String    @id
+  familyId         String
+  userId           String
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt        DateTime  @default(now())
+  expiresAt        DateTime
+  familyExpiresAt  DateTime
+  usedAt           DateTime?
+  familyRevokedAt  DateTime?
+  claims           Json?
+
+  @@index([userId])
+  @@index([familyId])
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  published Boolean  @default(false)
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

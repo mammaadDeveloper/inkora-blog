@@ -1,0 +1,74 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthTokens {
+  accessToken: String!
+  refreshToken: String!
+  user: UserType!
+}
+
+input CreatePostInput {
+  content: String!
+  published: Boolean = false
+  title: String!
+}
+
+type Mutation {
+  createPost(input: CreatePostInput!): PostType!
+  deletePost(postId: String!): Boolean!
+  refreshTokens(input: RefreshTokenInput!): AuthTokens!
+  register(input: RegisterInput!): AuthTokens!
+  signIn(input: SignInInput!): AuthTokens!
+  signOut(input: RefreshTokenInput!): Boolean!
+  updatePost(input: UpdatePostInput!, postId: String!): PostType!
+}
+
+type PostType {
+  author: UserType!
+  content: String!
+  id: ID!
+  published: Boolean!
+  title: String!
+}
+
+type Query {
+  adminPosts: [PostType!]!
+
+  """Returns the current application health status."""
+  health: String!
+  me: UserType!
+  post(id: String!): PostType
+  posts: [PostType!]!
+}
+
+input RefreshTokenInput {
+  refreshToken: String!
+}
+
+input RegisterInput {
+  email: String!
+  password: String!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+input UpdatePostInput {
+  content: String
+  published: Boolean
+  title: String
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+type UserType {
+  email: String!
+  id: ID!
+  role: UserRole!
+}
