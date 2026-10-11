@@ -17,9 +17,9 @@ input CreatePostInput {
 type Mutation {
   createPost(input: CreatePostInput!): PostType!
   deletePost(postId: String!): Boolean!
+  login(input: SignInInput!): AuthTokens!
   refreshTokens(input: RefreshTokenInput!): AuthTokens!
   register(input: RegisterInput!): AuthTokens!
-  signIn(input: SignInInput!): AuthTokens!
   signOut(input: RefreshTokenInput!): Boolean!
   updatePost(input: UpdatePostInput!, postId: String!): PostType!
 }

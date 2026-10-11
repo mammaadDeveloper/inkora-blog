@@ -21,7 +21,7 @@ export class AuthResolver {
   }
 
   @Public()
-  @Mutation(() => AuthTokens)
+  @Mutation(() => AuthTokens, { name: 'login' })
   async signIn(@Args('input') input: SignInInput): Promise<AuthTokens> {
     return this.authService.signIn(input);
   }
